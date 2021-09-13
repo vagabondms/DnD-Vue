@@ -1,5 +1,5 @@
 <template>
-  <div class="size-1">
+  <div class="size-1" ref="target" @dragover="createDiv">
     <v-icon>mdi-drag-horizontal</v-icon>
     <div class="contents">
 
@@ -11,6 +11,29 @@
 
 <script>
 export default {
+  props:{
+    isDragging : {
+      type : Boolean,
+    require : true,
+    }
+    
+  },
+  methods:{
+    createDiv(){
+      if(this.isDragging){
+        const grid = this.$refs.target.parentElement
+        const newDiv = document.createElement('div')
+        newDiv.classList.add('placeholder')
+        
+        const deletePlaceHolder = ()=>{
+          document.querySelector('.placeholder').remove()
+        } 
+        newDiv.addEventListener('dragleave', deletePlaceHolder)
+        grid.insertBefore(newDiv, this.$refs.target)
+      }
+      
+    },
+  }
 }
 </script>
 
@@ -20,6 +43,13 @@ export default {
   grid-column : auto / span 1;
   display:flex;
   flex-direction:column;
-  
+}
+
+</style>
+
+<style>
+.placeholder{
+  background-color: gainsboro;
+  opacity: 0.5;
 }
 </style>

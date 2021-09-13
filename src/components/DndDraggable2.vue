@@ -2,7 +2,7 @@
   <div class="size-2">
     <v-icon>mdi-drag-horizontal</v-icon>
     <div class="contents">
-      draggable2
+      <slot></slot>
     </div>
       
   </div>

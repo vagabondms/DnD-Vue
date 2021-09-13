@@ -1,25 +1,29 @@
 <template>
-  <div class="dnd-layout">
-      <dnd-draggable1>
-          <template>what?</template>
+  <div class="dnd-layout" >
+      <dnd-draggable1 :isDragging="isDragging">
+          <template>1</template>
       </dnd-draggable1>
-      <dnd-draggable1>
-          <template>how??</template>
-      </dnd-draggable1>
-      <target-draggable/>
-      <dnd-draggable1>
-          <template>how??</template>
-      </dnd-draggable1>
-      <dnd-draggable2></dnd-draggable2>
       <dnd-draggable1>
           <template>2</template>
       </dnd-draggable1>
-      <dnd-draggable1>
+      <target-draggable @drag-on="dragOn" @drag-off="dragOff" />
+      <dnd-draggable1 :isDragging="isDragging">
           <template>3</template>
       </dnd-draggable1>
-      <dnd-draggable2></dnd-draggable2>
+      <dnd-draggable2>
+          <template>Large 1</template>
+      </dnd-draggable2>
       <dnd-draggable1>
-          <template>3</template>
+          <template>4</template>
+      </dnd-draggable1>
+      <dnd-draggable1>
+          <template>5</template>
+      </dnd-draggable1>
+      <dnd-draggable2>
+          <template>Large 2</template>
+      </dnd-draggable2>
+      <dnd-draggable1>
+          <template>6</template>
       </dnd-draggable1>
         
   </div>
@@ -34,11 +38,27 @@ import TargetDraggable from "./TagetDraggable.vue"
 
 
 export default {
+    data(){
+        return {
+            isDragging : false
+        }
+    },
+    methods:{
+        
+        dragOn(){
+            console.log('on')
+            this.isDragging = true
+        },
+        dragOff(){
+            console.log('off')
+            this.isDragging = false
+        },
+
+    },
     components:{
         DndDraggable1,
         DndDraggable2,
         TargetDraggable,
-        
     }
 }
 </script>
@@ -57,5 +77,6 @@ export default {
     /* column을 기준으로 쌓인다. */
     
 }
+
 </style>
  
